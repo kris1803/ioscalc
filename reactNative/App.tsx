@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, TouchableOpacity, StatusBar, useColorScheme, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles/main';
 
 export default function MainScreen() {
-   const [display, setDisplay] = useState('0');
-   const [operator, setOperator] = useState('');
-   const [firstNumber, setFirstNumber] = useState('');
-   const [secondNumber, setSecondNumber] = useState('');
+   const [display, setDisplay] = useState<string>('0');
+   const [operator, setOperator] = useState<string>('');
+   const [firstNumber, setFirstNumber] = useState<string>('');
+   const [secondNumber, setSecondNumber] = useState<string>('');
+
+   console.log(useColorScheme())
 
    function handleNumber (number) {
       number = number.toString();
@@ -51,7 +53,7 @@ export default function MainScreen() {
       setDisplay(( Number(display) / 100).toString());
    }
 
-   const handleSign = () => {
+   const handleSign = useCallback(() => {
       let displayCopy = (`${display}`).split('');
       if (displayCopy[0] === '-') {
          displayCopy.shift();
@@ -61,9 +63,9 @@ export default function MainScreen() {
          displayCopy.unshift('-');
          setDisplay(displayCopy.join(''));
       }
-   }
+   }, [display])
 
-   const handleExecute = () => {
+   function handleExecute () {
       setSecondNumber(display);
       let tempSecond = parseFloat(display);
       console.log(tempSecond);
@@ -105,7 +107,7 @@ export default function MainScreen() {
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.operatorWrapperBg} >
-                     <TouchableOpacity onPress={() => handleOperator('/')} style={styles.buttonOperator}>
+                     <TouchableOpacity onPress={useCallback(() => handleOperator('/'), [])} style={styles.buttonOperator}>
                         <Text style={styles.whiteText} >÷</Text>
                      </TouchableOpacity>
                   </View>
@@ -114,28 +116,28 @@ export default function MainScreen() {
             <View style={styles.buttonRow}>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(7)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(7), [])} style={styles.button}>
                         <Text style={styles.whiteText} >7</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(8)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(8), [])} style={styles.button}>
                         <Text style={styles.whiteText} >8</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(9)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(9), [])} style={styles.button}>
                         <Text style={styles.whiteText} >9</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.operatorWrapperBg} >
-                     <TouchableOpacity onPress={() => handleOperator('*')} style={styles.buttonOperator}>
+                     <TouchableOpacity onPress={useCallback(() => handleOperator('*'), [])} style={styles.buttonOperator}>
                         <Text style={styles.whiteText} >×</Text>
                      </TouchableOpacity>
                   </View>
@@ -144,28 +146,28 @@ export default function MainScreen() {
             <View style={styles.buttonRow}>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(4)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(4), [])} style={styles.button}>
                         <Text style={styles.whiteText} >4</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(5)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(5), [])} style={styles.button}>
                         <Text style={styles.whiteText} >5</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(6)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(6), [])} style={styles.button}>
                         <Text style={styles.whiteText} >6</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.operatorWrapperBg} >
-                     <TouchableOpacity onPress={() => handleOperator('-')} style={styles.buttonOperator}>
+                     <TouchableOpacity onPress={useCallback(() => handleOperator('-'), [])} style={styles.buttonOperator}>
                         <Text style={styles.whiteText} >-</Text>
                      </TouchableOpacity>
                   </View>
@@ -174,28 +176,28 @@ export default function MainScreen() {
             <View style={styles.buttonRow}>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(1)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(1), [])} style={styles.button}>
                         <Text style={styles.whiteText} >1</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(2)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(2), [])} style={styles.button}>
                         <Text style={styles.whiteText} >2</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(3)} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(3), [])} style={styles.button}>
                         <Text style={styles.whiteText} >3</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer} >
                   <View style={styles.operatorWrapperBg} >
-                     <TouchableOpacity onPress={() => handleOperator('+')} style={styles.buttonOperator}>
+                     <TouchableOpacity onPress={useCallback(() => handleOperator('+'), [])} style={styles.buttonOperator}>
                         <Text style={styles.whiteText} >+</Text>
                      </TouchableOpacity>
                   </View>
@@ -204,14 +206,14 @@ export default function MainScreen() {
             <View style={styles.buttonRow}>
                <View style={{ width: '50%', aspectRatio: 2, alignItems: 'center', justifyContent: 'center' }} >
                   <View style={styles.zeroWrapperBg} >
-                     <TouchableOpacity onPress={() => handleNumber(0)} style={styles.zeroButton}>
+                     <TouchableOpacity onPress={useCallback(() => handleNumber(0), [])} style={styles.zeroButton}>
                         <Text style={styles.whiteText} >0</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={styles.buttonContainer}>
                   <View style={styles.buttonWrapperBg} >
-                     <TouchableOpacity onPress={() => setDisplay((value) => value+'.')} style={styles.button}>
+                     <TouchableOpacity onPress={useCallback(() => setDisplay((value) => value+'.'), [])} style={styles.button}>
                         <Text style={styles.whiteText} >,</Text>
                      </TouchableOpacity>
                   </View>
@@ -225,7 +227,7 @@ export default function MainScreen() {
                </View>
             </View>
          </View>
-         <StatusBar />
+         <StatusBar backgroundColor={"#1c1c1c"} barStyle={'light-content'} />
       </SafeAreaView>
    )
 }
