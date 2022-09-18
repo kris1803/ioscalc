@@ -9,6 +9,13 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         fontFamily: 'Roboto',
     },
+    displayContainer: {
+        width: '100%', 
+        flex: 1, 
+        justifyContent: 'flex-end', 
+        alignItems: 'flex-end', 
+        paddingHorizontal: '5%'
+    },
     whiteText: {
         color: '#fff',
         fontSize: 32,

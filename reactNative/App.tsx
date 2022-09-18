@@ -9,7 +9,7 @@ export default function MainScreen() {
    const [firstNumber, setFirstNumber] = useState('');
    const [secondNumber, setSecondNumber] = useState('');
 
-   const handleNumber = (number) => {
+   function handleNumber (number) {
       number = number.toString();
       if (number === '0' && display === '0') {
          return;
@@ -23,11 +23,13 @@ export default function MainScreen() {
       }
       setDisplay((text) => text + number);
    }
-   const handleOperator = (text) => {
+
+   function handleOperator (text) {
       setFirstNumber(display);
       setOperator(text);
       setDisplay('0');
    }
+
    const clearAll = () => {
       if (display === '0' || display === '0.' || display === '-0' || display === '-0.') {
          setDisplay('0');
@@ -40,6 +42,7 @@ export default function MainScreen() {
          setSecondNumber('');
       }
    }
+
    const handlePercent = () => {
       if (display === '0' || display === '0.' || display === '-0' || display === '-0.') {
          setDisplay('0');
@@ -80,23 +83,23 @@ export default function MainScreen() {
 
    return (
       <SafeAreaView style={styles.container} >
-         <View style={{ width: '100%', flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', paddingHorizontal: '5%' }} >
+         <View style={styles.displayContainer} >
             <Text style={styles.mainText} >{display}</Text>
          </View>
          <View style={{ width: '100%', paddingHorizontal: '1%', paddingBottom: '1.5%' }}>
             <View style={styles.buttonRow}>
                <View style={styles.buttonContainer} >
-                  <TouchableOpacity onPress={() => { clearAll() }} style={styles.buttonLight}>
+                  <TouchableOpacity onPress={clearAll} style={styles.buttonLight}>
                      <Text style={styles.blackButtonText} >{display === '0' ? 'AC' : 'C'}</Text>
                   </TouchableOpacity>
                </View>
                <View style={styles.buttonContainer} >
-                  <TouchableOpacity onPress={() => handleSign()} style={styles.buttonLight}>
+                  <TouchableOpacity onPress={handleSign} style={styles.buttonLight}>
                      <Text style={styles.blackButtonText} >±</Text>
                   </TouchableOpacity>
                </View>
                <View style={styles.buttonContainer} >
-                  <TouchableOpacity onPress={() => handlePercent()} style={styles.buttonLight}>
+                  <TouchableOpacity onPress={handlePercent} style={styles.buttonLight}>
                      <Text style={styles.blackButtonText} >%</Text>
                   </TouchableOpacity>
                </View>
@@ -215,7 +218,7 @@ export default function MainScreen() {
                </View>
                <View style={styles.buttonContainer}>
                   <View style={styles.operatorWrapperBg} >
-                     <TouchableOpacity onPress={() => handleExecute()} style={styles.buttonOperator}>
+                     <TouchableOpacity onPress={handleExecute} style={styles.buttonOperator}>
                         <Text style={styles.whiteText} >=</Text>
                      </TouchableOpacity>
                   </View>
